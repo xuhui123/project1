@@ -1,0 +1,151 @@
+<!doctype html>  <!--声明文档类型-->
+<html>
+     <head>
+	    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	    <title></title>
+		<meta name="Keywords" content="关键词，关键词">
+	    <meta name="description" content="描述">
+		<style type="text/css">
+		*{margin:0;padding:0;}
+		li{list-style:none;}
+		#box{
+			width:300px;
+			height:300px;
+			
+			margin:50px auto;
+			position:relative;
+		
+		}
+		#circle{
+			width:300px;
+			height:300px;
+			border-radius:50%;
+			border:10px solid #373f4a;
+			box-sizing:border-box;
+			background:#262c33;
+
+		}
+		#circle li{
+			width:4px;
+			height:4px;
+			background:#fff;
+			border-radius:100%;
+			position:absolute;
+			left:50%;
+			margin-left:-2px;
+			top:15px;
+			transform-origin:center 135px;
+		
+		}
+		#middle,.mask{
+			position:absolute;
+			width:20px;
+			height:20px;
+			background:#5d2919;
+			border-radius:50%;
+			left:0;
+			right:0;
+			bottom:0;
+			top:0;
+			margin:auto;
+			
+		
+		
+		}
+		#middle>div{
+			width:10px;
+			border-radius:10px 9px 0px 0px/19px 25px 0px 0px;
+			position:absolute;
+			transform-origin:bottom;
+		
+		}
+		#hour{
+			height:60px;
+			background:#fff;
+			top:-50px;
+			left:5px;
+		}
+		#min{
+			height:90px;
+			background:#fff;
+			top:-80px;
+			left:5px;
+		}
+		#sec{
+			height:110px;
+			background:#f16b41;
+			top:-100px;
+			left:5px;
+		
+		}
+		.mask{
+			z-index:1000;
+		}
+		
+		</style>
+	 </head>
+
+     <body>
+	    <div id="box">
+			<div class="mask"></div>
+			<div id="middle">
+				<div id="hour"></div>
+				<div id="min"></div>
+				<div id="sec"></div>
+				
+			</div>
+			<ul id="circle">
+				
+			
+			</ul>
+		
+		
+		</div>
+			
+		
+		 <script>
+
+				var oul=document.getElementById("circle"),
+					ohour=document.getElementById("hour"),
+					omin=document.getElementById("min"),
+					osec=document.getElementById("sec");
+				//循环添加li元素
+				for(var i=0;i<60;i++){
+					var oli=document.createElement("li");
+					oli.style.transform="rotate("+(6*i)+"deg)";
+					oul.appendChild(oli);
+				}
+				var olis=oul.querySelectorAll("li");
+				//将5分钟的倍数的颜色改为红色
+				for(var i=0;i<12;i++){
+					olis[5*i].style.background="#903c22";
+				
+				}
+			//获取时间
+			getTime();
+			//循环设置时间
+			setInterval(getTime,1000);
+
+			function getTime(){
+				var date=new Date();
+				var s=date.getSeconds();
+				var m=date.getMinutes()+(s/60);
+				var h=date.getHours()+(m/60);
+				console.log(h);
+
+			
+				ohour.style.transform="rotate("+(h*30)+"deg)"
+				omin.style.transform="rotate("+(m*6)+"deg)"
+				osec.style.transform="rotate("+(s*6)+"deg)";
+				
+			}
+		 
+		 </script>
+	 
+	 
+	 </body>
+
+
+
+
+</html>
